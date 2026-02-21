@@ -47,7 +47,7 @@ export default function ProtectedPage() {
     )
   }
 
-  const fullName = user?.user_metadata?.full_name || "Perdorues"
+  const fullName = user?.user_metadata?.full_name || "Përdorues"
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -56,10 +56,10 @@ export default function ProtectedPage() {
         <div className="mb-8 flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold tracking-tight text-foreground">
-              Pershendetje, {fullName}
+              Përshëndetje, {fullName}
             </h1>
             <p className="mt-1 text-sm text-muted-foreground">
-              Paraqisni dhe ndiqni ankesat tuaja ketu.
+              Paraqisni dhe ndiqni ankesat tuaja këtu.
             </p>
           </div>
           <Button variant="outline" size="sm" onClick={handleLogout}>

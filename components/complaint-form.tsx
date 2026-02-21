@@ -18,13 +18,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Loader2, SendHorizonal } from "lucide-react"
 
 const categories = [
-  "Urbanistike",
+  "Urbanistikë",
   "Mjedisi",
   "Arsimi",
-  "Infrastrukture",
-  "Shendetesi",
+  "Infrastrukturë",
+  "Shëndetësi",
   "Siguria Publike",
-  "Tjeter",
+  "Tjetër",
 ]
 
 interface ComplaintFormProps {
@@ -43,15 +43,15 @@ export function ComplaintForm({ userId, onSuccess }: ComplaintFormProps) {
     const details = formData.get("details") as string
 
     if (!category) {
-      toast.error("Ju lutem zgjidhni kategorine.")
+      toast.error("Ju lutem zgjidhni kategorinë.")
       return
     }
     if (!address) {
-      toast.error("Ju lutem vendosni adresen.")
+      toast.error("Ju lutem vendosni adresën.")
       return
     }
     if (!details) {
-      toast.error("Ju lutem pershkruani problemin.")
+      toast.error("Ju lutem përshkruani problemin.")
       return
     }
 
@@ -65,12 +65,12 @@ export function ComplaintForm({ userId, onSuccess }: ComplaintFormProps) {
     })
 
     if (error) {
-      toast.error("Gabim gjate dergimit te ankeses: " + error.message)
+      toast.error("Gabim gjatë dergimit të ankesës: " + error.message)
       setLoading(false)
       return
     }
 
-    toast.success("Ankesa u dergua me sukses!")
+    toast.success("Ankesa u dërgua me sukses!")
     setCategory("")
     e.currentTarget.reset()
     setLoading(false)
@@ -84,7 +84,7 @@ export function ComplaintForm({ userId, onSuccess }: ComplaintFormProps) {
           Ankesa e Re
         </CardTitle>
         <CardDescription>
-          Plotesoni formularin me poshte per te paraqitur ankesen tuaj.
+          Plotësoni formularin më poshtë për të paraqitur ankesën tuaj.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -136,7 +136,7 @@ export function ComplaintForm({ userId, onSuccess }: ComplaintFormProps) {
             ) : (
               <>
                 <SendHorizonal className="mr-2 h-4 w-4" />
-                Dergo Ankesen
+                Dergo Ankesën
               </>
             )}
           </Button>

@@ -18,7 +18,7 @@ export function Navbar() {
     pathname.startsWith("/auth") || pathname.startsWith("/protected") || pathname.startsWith("/admin")
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border bg-[#629FAD] backdrop-blur-md">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 lg:px-6">
         <Link href="/" className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">

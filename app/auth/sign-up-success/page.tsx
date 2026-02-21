@@ -18,7 +18,7 @@ export default function SignUpSuccessPage() {
               Regjistrimi u Krye!
             </CardTitle>
             <CardDescription>
-              Llogaria juaj u krijua me sukses. Tani mund te paraqisni ankesat tuaja.
+              Llogaria juaj u krijua me sukses. Tani mund të paraqisni ankesat tuaja.
             </CardDescription>
           </CardHeader>
           <CardContent>

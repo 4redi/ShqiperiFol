@@ -78,7 +78,7 @@ export function ComplaintsTable() {
     const { error } = await supabase.from("complaints").delete().eq("id", id)
 
     if (error) {
-      toast.error("Gabim gjate fshirjes.")
+      toast.error("Gabim gjatë fshirjes.")
       return
     }
     toast.success("Ankesa u fshi.")
@@ -98,7 +98,7 @@ export function ComplaintsTable() {
   if (!complaints || complaints.length === 0) {
     return (
       <p className="py-10 text-center text-sm text-muted-foreground">
-        Nuk ka ankesa per momentin.
+        Nuk ka ankesa për momentin.
       </p>
     )
   }
@@ -162,7 +162,7 @@ export function ComplaintsTable() {
                   onClick={() => handleDelete(c.id)}
                 >
                   <Trash2 className="h-4 w-4" />
-                  <span className="sr-only">Fshi ankesen</span>
+                  <span className="sr-only">Fshi ankesën</span>
                 </Button>
               </TableCell>
             </TableRow>

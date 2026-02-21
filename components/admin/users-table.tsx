@@ -63,7 +63,7 @@ export function UsersTable() {
   if (!profiles || profiles.length === 0) {
     return (
       <p className="py-10 text-center text-sm text-muted-foreground">
-        Nuk ka perdorues te regjistruar.
+        Nuk ka përdorues të regjistruar.
       </p>
     )
   }
@@ -73,7 +73,7 @@ export function UsersTable() {
       <Table>
         <TableHeader>
           <TableRow className="bg-muted/50">
-            <TableHead className="text-foreground">Emri i Plote</TableHead>
+            <TableHead className="text-foreground">Emri i Plotë</TableHead>
             <TableHead className="text-foreground">ID</TableHead>
             <TableHead className="text-foreground">Data e Regjistrimit</TableHead>
             <TableHead className="text-right text-foreground">Veprime</TableHead>
@@ -103,7 +103,7 @@ export function UsersTable() {
                   onClick={() => handleDelete(profile.id)}
                 >
                   <Trash2 className="h-4 w-4" />
-                  <span className="sr-only">Fshi perdoruesin</span>
+                  <span className="sr-only">Fshi përdoruesin</span>
                 </Button>
               </TableCell>
             </TableRow>

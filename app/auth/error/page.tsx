@@ -15,15 +15,15 @@ export default function AuthErrorPage() {
               <AlertTriangle className="h-7 w-7 text-destructive" />
             </div>
             <CardTitle className="text-2xl font-bold text-foreground">
-              Gabim Autentikimi
+              Gabim Autentifikimi
             </CardTitle>
             <CardDescription>
-              Dicka shkoi gabim gjate procesit te autentikimit. Ju lutem provoni perseri.
+              Dicka shkoi gabim gjatë procesit të autentifikimit. Ju lutem provoni përseri.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild className="w-full">
-              <Link href="/auth/login">Provo Perseri</Link>
+              <Link href="/auth/login">Provoni Përsëri</Link>
             </Button>
           </CardContent>
         </Card>

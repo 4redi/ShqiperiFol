@@ -10,31 +10,30 @@ const stats = [
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-card py-20 lg:py-28">
+    <section className="relative overflow-hidden bg-teal-50 py-20 lg:py-28">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent" />
       <div className="relative mx-auto max-w-6xl px-4 lg:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-4 py-1.5">
             <span className="text-xs font-medium text-secondary-foreground">
-              Platforma Qytetare
+              PLATFORMË QYTETARE
             </span>
           </div>
           <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground lg:text-5xl">
-            Zeri juaj per nje komunitet me te mire
+            Zëri juaj për një komunitet më të mirë
           </h1>
           <p className="mt-5 text-pretty text-lg leading-relaxed text-muted-foreground">
-            Paraqisni ankesat tuaja per problemet ne komunitet. Nga urbanistika te mjedisi,
-            cdo ze ka rendesi per nje te ardhme me te mire.
+            Paraqisni ankesat tuaja për problemet në komunitet. Nga urbanistika te mjedisi, çdo zë ka rëndësi për një të ardhme më të mirë.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button size="lg" asChild>
               <Link href="/auth/sign-up">
-                Fillo Tani
+                FILLO TANI
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="#si-funksionon">Mesoni Me Shume</Link>
+              <Link href="#si-funksionon">MËSONI MË SHUMË</Link>
             </Button>
           </div>
         </div>

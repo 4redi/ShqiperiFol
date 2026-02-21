@@ -24,12 +24,12 @@ export default function SignUpPage() {
     const password = formData.get("password") as string
 
     if (!fullName || !email || !password) {
-      toast.error("Ju lutem plotesoni te gjitha fushat.")
+      toast.error("Ju lutem plotësoni të gjitha fushat.")
       return
     }
 
     if (password.length < 6) {
-      toast.error("Fjalekalimi duhet te kete te pakten 6 karaktere.")
+      toast.error("Fjalekalimi duhet të ketë të paktën 8 karaktere.")
       return
     }
 
@@ -63,16 +63,16 @@ export default function SignUpPage() {
         <Card className="w-full max-w-md border-border">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-bold text-foreground">
-              Krijoni Llogarine
+              Krijoni Llogarinë
             </CardTitle>
             <CardDescription>
-              Regjistrohuni per te paraqitur ankesat tuaja
+              Regjistrohuni për të paraqitur ankesat tuaja
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-                <Label htmlFor="full_name">Emri i Plote</Label>
+                <Label htmlFor="full_name">Emri i Plotë</Label>
                 <Input
                   id="full_name"
                   name="full_name"
@@ -97,9 +97,9 @@ export default function SignUpPage() {
                   id="password"
                   name="password"
                   type="password"
-                  placeholder="Minimumi 6 karaktere"
+                  placeholder="Minimumi 8 karaktere"
                   required
-                  minLength={6}
+                  minLength={8}
                 />
               </div>
               <Button type="submit" className="mt-2 w-full" disabled={loading}>
@@ -114,7 +114,7 @@ export default function SignUpPage() {
               </Button>
             </form>
             <p className="mt-4 text-center text-sm text-muted-foreground">
-              {"Keni nje llogari? "}
+              {"Keni një llogari? "}
               <Link
                 href="/auth/login"
                 className="font-medium text-primary underline-offset-4 hover:underline"

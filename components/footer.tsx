@@ -27,7 +27,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Platforma dixhitale per paraqitjen e ankesave qytetare. Zeri juaj ka rendesi.
+              Platforma dixhitale për paraqitjen e ankesave qytetare. Zëri juaj ka rëndësi            
             </p>
           </div>
 
@@ -74,7 +74,7 @@ export function Footer() {
           <p className="text-center text-xs text-muted-foreground">
             {'© '}
             {new Date().getFullYear()}
-            {' Ankesa. Te gjitha te drejtat e rezervuara.'}
+            {' Ankesa. Të gjitha të drejtat e rezervuara.'}
           </p>
         </div>
       </div>

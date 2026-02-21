@@ -23,7 +23,7 @@ export default function LoginPage() {
     const password = formData.get("password") as string
 
     if (!email || !password) {
-      toast.error("Ju lutem plotesoni te gjitha fushat.")
+      toast.error("Ju lutem plotësoni të gjitha fushat.")
       return
     }
 
@@ -33,7 +33,7 @@ export default function LoginPage() {
 
     if (error) {
       toast.error(error.message === "Invalid login credentials"
-        ? "Email ose fjalekalimi gabim."
+        ? "Email ose fjalekalimi janë të gabuara."
         : error.message)
       setLoading(false)
       return
@@ -51,10 +51,10 @@ export default function LoginPage() {
         <Card className="w-full max-w-md border-border">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-bold text-foreground">
-              Miresevini Perseri
+              Mirësevini Përsëri
             </CardTitle>
             <CardDescription>
-              Hyni ne llogarine tuaj per te vazhduar
+              Hyni në llogarinë tuaj për të vazhduar
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -70,12 +70,12 @@ export default function LoginPage() {
                 />
               </div>
               <div className="flex flex-col gap-2">
-                <Label htmlFor="password">Fjalekalimi</Label>
+                <Label htmlFor="password">Fjalëkalimi</Label>
                 <Input
                   id="password"
                   name="password"
                   type="password"
-                  placeholder="Fjalekalimi juaj"
+                  placeholder="Fjalëkalimi juaj"
                   required
                 />
               </div>
@@ -83,7 +83,7 @@ export default function LoginPage() {
                 {loading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Duke hyre...
+                    Duke hyrë...
                   </>
                 ) : (
                   "Hyr"

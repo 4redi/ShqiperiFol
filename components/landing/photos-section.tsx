@@ -4,8 +4,8 @@ import { Building2, TreePine, GraduationCap, HardHat } from "lucide-react"
 const categories = [
   {
     icon: Building2,
-    title: "Urbanistike",
-    description: "Planifikim urban, ndertesa, rruge",
+    title: "Urbanistikë",
+    description: "Planifikim urban, ndërtesa, rrugë",
     color: "bg-primary/10 text-primary",
   },
   {
@@ -17,13 +17,13 @@ const categories = [
   {
     icon: GraduationCap,
     title: "Arsimi",
-    description: "Shkolla, universitete, infrastrukture arsimore",
+    description: "Shkolla, universitete, infrastrukturë arsimore",
     color: "bg-chart-1/10 text-chart-1",
   },
   {
     icon: HardHat,
-    title: "Infrastrukture",
-    description: "Rruge, ura, sisteme ujore",
+    title: "Infrastrukturë",
+    description: "Rrugë, ura, sisteme ujore",
     color: "bg-chart-2/10 text-chart-2",
   },
 ]
@@ -34,10 +34,10 @@ export function PhotosSection() {
       <div className="mx-auto max-w-6xl px-4 lg:px-6">
         <div className="mx-auto max-w-lg text-center">
           <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground">
-            Kategorite e Ankesave
+            KATEGORITË E ANKESAVE
           </h2>
           <p className="mt-3 text-muted-foreground">
-            Zgjidhni fushen qe perkon me problemin tuaj per nje trajtim me te shpejte.
+            Zgjidhni fushën që përkon me problemin tuaj për një trajtim me të shpejtë.
           </p>
         </div>
 

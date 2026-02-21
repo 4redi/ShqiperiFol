@@ -9,7 +9,7 @@ const _jetbrainsMono = JetBrains_Mono({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Ankesa - Platforma e Ankesave Qytetare',
-  description: 'Paraqisni ankesat tuaja per problemet ne komunitet. Urbanistike, Mjedisi, Arsimi dhe me shume.',
+  description: 'Paraqisni ankesat tuaja për problemet ne komunitet. Urbanistikë, Mjedisi, Arsimi dhe më shumë.',
 }
 
 export default function RootLayout({

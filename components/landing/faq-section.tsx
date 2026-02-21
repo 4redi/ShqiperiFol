@@ -7,24 +7,24 @@ import {
 
 const faqs = [
   {
-    q: "Si mund te paraqes nje ankese?",
-    a: "Pasi te regjistroheni dhe te hyni ne llogarine tuaj, klikoni butonin 'Paraqit Ankese', zgjidhni kategorine, vendosni adresen dhe pershkruani problemin ne detaje.",
+    q: "Si mund të paraqes një ankesë?",
+    a: "Pasi të regjistroheni dhe të hyni në llogarinë tuaj, klikoni butonin 'Paraqit Ankesë', zgjidhni kategorinë, vendosni adresën dhe përshkruani problemin në detaje.",
   },
   {
-    q: "Sa kohe duhet per te marre pergjigje?",
-    a: "Zakonisht brenda 24-48 oreve do te merrni nje perditesim per statusin e ankeses suaj. Rastet me urgjente trajtohen me prioritet.",
+    q: "Sa kohë duhet për të marrë përgjigje?",
+    a: "Zakonisht brenda 24-48 orëve do të merrni një përditësim për statusin e ankesës suaj. Rastet më urgjente trajtohen me prioritet.",
   },
   {
-    q: "A mund te ndjek statusin e ankeses sime?",
-    a: "Po, pasi te hyni ne llogarine tuaj, do te shikoni te gjitha ankesat tuaja me statusin aktual: Ne Pritje, Ne Shqyrtim, Zgjidhur ose Refuzuar.",
+    q: "A mund të ndjek statusin e ankesës sime?",
+    a: "Po, pasi të hyni në llogarinë tuaj, do të shikoni të gjitha ankesat tuaja me statusin aktual: Në Pritje, Në Shqyrtim, Zgjidhur ose Refuzuar.",
   },
   {
-    q: "Cilat kategori ankesash mbeshteten?",
-    a: "Platforma mbulon: Urbanistike, Mjedisi, Arsimi, Infrastrukture, Shendetesi, Siguria Publike, dhe kategori te tjera te pergjithshme.",
+    q: "Cilat kategori ankesash mbështeten?",
+    a: "Platforma mbulon: Urbanistikë, Mjedisi, Arsimi, Infrastrukturë, Shëndetësi, Siguria Publike, dhe kategori të tjera të përgjithshme.",
   },
   {
-    q: "A eshte falas perdorimi i platformes?",
-    a: "Po, platforma eshte plotesisht falas per te gjithe qytetaret. Misioni yne eshte te mundesojme komunikim me te mire ndermjet qytetareve dhe institucioneve.",
+    q: "A është falas përdorimi i platformës?",
+    a: "Po, platforma është plotësisht falas për të gjithë qytetarët. Misioni ynë është të mundësojmë komunikim më të mirë ndërmjet qytetarëve dhe institucioneve.",
   },
 ]
 
@@ -34,10 +34,10 @@ export function FaqSection() {
       <div className="mx-auto max-w-2xl px-4 lg:px-6">
         <div className="text-center">
           <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground">
-            Pyetje te Shpeshta
+            PYETJE TË SHPESHTA
           </h2>
           <p className="mt-3 text-muted-foreground">
-            Gjithcka qe duhet te dini per platformen Ankesa.
+            Gjithçka që duhet të dini për platformen Ankesa.
           </p>
         </div>
 

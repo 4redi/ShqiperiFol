@@ -8,8 +8,8 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Clock, CheckCircle2, XCircle, Search } from "lucide-react"
 
 const statusConfig: Record<string, { label: string; variant: "default" | "secondary" | "destructive" | "outline"; icon: React.ElementType }> = {
-  "Ne pritje": { label: "Ne Pritje", variant: "secondary", icon: Clock },
-  "Ne shqyrtim": { label: "Ne Shqyrtim", variant: "outline", icon: Search },
+  "Në pritje": { label: "Në Pritje", variant: "secondary", icon: Clock },
+  "Në shqyrtim": { label: "Në Shqyrtim", variant: "outline", icon: Search },
   "Zgjidhur": { label: "Zgjidhur", variant: "default", icon: CheckCircle2 },
   "Refuzuar": { label: "Refuzuar", variant: "destructive", icon: XCircle },
 }
@@ -53,7 +53,7 @@ export function MyComplaints({ mutateKey }: { mutateKey?: string }) {
         <CardTitle className="text-xl font-bold text-foreground">Ankesat e Mia</CardTitle>
         <CardDescription>
           {complaints?.length
-            ? `${complaints.length} ankesa gjithsej`
+            ? `${complaints.length} ankesa gjithsëj`
             : "Nuk keni paraqitur ende ankesa"}
         </CardDescription>
       </CardHeader>
@@ -61,7 +61,7 @@ export function MyComplaints({ mutateKey }: { mutateKey?: string }) {
         {complaints && complaints.length > 0 ? (
           <div className="flex flex-col gap-3">
             {complaints.map((complaint) => {
-              const config = statusConfig[complaint.status] || statusConfig["Ne pritje"]
+              const config = statusConfig[complaint.status] || statusConfig["Në pritje"]
               const StatusIcon = config.icon
               return (
                 <div
@@ -92,7 +92,7 @@ export function MyComplaints({ mutateKey }: { mutateKey?: string }) {
           </div>
         ) : (
           <p className="py-6 text-center text-sm text-muted-foreground">
-            Nuk keni asnje ankese. Paraqisni nje ankese te re me lart.
+            Nuk keni asnjë ankesë. Paraqisni një ankesë të re më lart.
           </p>
         )}
       </CardContent>

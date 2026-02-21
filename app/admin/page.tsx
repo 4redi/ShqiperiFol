@@ -65,7 +65,7 @@ export default function AdminPage() {
                 Paneli i Administrimit
               </h1>
               <p className="text-sm text-muted-foreground">
-                Menaxhoni ankesat dhe perdoruesit
+                Menaxhoni ankesat dhe përdoruesit
               </p>
             </div>
           </div>
@@ -83,7 +83,7 @@ export default function AdminPage() {
             </TabsTrigger>
             <TabsTrigger value="users" className="flex items-center gap-2">
               <Users className="h-4 w-4" />
-              Perdoruesit
+              Përdoruesit
             </TabsTrigger>
           </TabsList>
           <TabsContent value="complaints">
