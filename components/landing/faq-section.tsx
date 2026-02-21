@@ -30,26 +30,21 @@ const faqs = [
 
 export function FaqSection() {
   return (
-    <section id="pyetje" className="bg-background py-20 lg:py-24">
-      <div className="mx-auto max-w-2xl px-4 lg:px-6">
-        <div className="text-center">
-          <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground">
-            PYETJE TË SHPESHTA
-          </h2>
-          <p className="mt-3 text-muted-foreground">
-            Gjithçka që duhet të dini për platformen Ankesa.
-          </p>
-        </div>
+    <section id="pyetje" className="bg-gradient-to-b from-white to-blue-50 py-20">
+      <div className="mx-auto max-w-2xl px-4">
+        <h2 className="text-center text-3xl font-bold text-gray-900">
+          PYETJE TË SHPESHTA
+        </h2>
 
         <Accordion type="single" collapsible className="mt-10">
           {faqs.map((faq, i) => (
-            <AccordionItem key={i} value={`faq-${i}`}>
-              <AccordionTrigger className="text-left text-sm font-medium text-foreground">
-                {faq.q}
-              </AccordionTrigger>
-              <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                {faq.a}
-              </AccordionContent>
+            <AccordionItem
+              key={i}
+              value={`faq-${i}`}
+              className="border-blue-100"
+            >
+              <AccordionTrigger>{faq.q}</AccordionTrigger>
+              <AccordionContent>{faq.a}</AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

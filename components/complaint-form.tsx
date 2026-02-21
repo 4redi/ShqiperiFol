@@ -14,7 +14,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Loader2, SendHorizonal } from "lucide-react"
 
 const categories = [
@@ -46,16 +52,9 @@ export function ComplaintForm({ userId, onSuccess }: ComplaintFormProps) {
       toast.error("Ju lutem zgjidhni kategorinë.")
       return
     }
-    if (!address) {
-      toast.error("Ju lutem vendosni adresën.")
-      return
-    }
-    if (!details) {
-      toast.error("Ju lutem përshkruani problemin.")
-      return
-    }
 
     setLoading(true)
+
     const supabase = createClient()
     const { error } = await supabase.from("complaints").insert({
       user_id: userId,
@@ -65,7 +64,7 @@ export function ComplaintForm({ userId, onSuccess }: ComplaintFormProps) {
     })
 
     if (error) {
-      toast.error("Gabim gjatë dergimit të ankesës: " + error.message)
+      toast.error("Gabim gjatë dergimit të ankesës.")
       setLoading(false)
       return
     }
@@ -78,22 +77,23 @@ export function ComplaintForm({ userId, onSuccess }: ComplaintFormProps) {
   }
 
   return (
-    <Card className="border-border">
+    <Card className="border-blue-100 bg-white/90 backdrop-blur-md shadow-xl">
       <CardHeader>
-        <CardTitle className="text-xl font-bold text-foreground">
+        <CardTitle className="text-xl font-bold text-gray-900">
           Ankesa e Re
         </CardTitle>
         <CardDescription>
-          Plotësoni formularin më poshtë për të paraqitur ankesën tuaj.
+          Plotësoni formularin për të paraqitur ankesën tuaj.
         </CardDescription>
       </CardHeader>
+
       <CardContent>
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <div className="flex flex-col gap-2">
-            <Label htmlFor="category">Kategoria *</Label>
-            <Select value={category} onValueChange={setCategory} required>
-              <SelectTrigger id="category">
-                <SelectValue placeholder="Zgjidhni kategorine" />
+            <Label>Kategoria</Label>
+            <Select value={category} onValueChange={setCategory}>
+              <SelectTrigger>
+                <SelectValue placeholder="Zgjidhni kategorinë" />
               </SelectTrigger>
               <SelectContent>
                 {categories.map((cat) => (
@@ -105,29 +105,20 @@ export function ComplaintForm({ userId, onSuccess }: ComplaintFormProps) {
             </Select>
           </div>
 
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="address">Adresa *</Label>
-            <Input
-              id="address"
-              name="address"
-              type="text"
-              placeholder="Vendndodhja e problemit"
-              required
-            />
-          </div>
+          <Input name="address" placeholder="Adresa" required />
 
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="details">Detajet *</Label>
-            <Textarea
-              id="details"
-              name="details"
-              placeholder="Pershkruani problemin ne detaje..."
-              rows={5}
-              required
-            />
-          </div>
+          <Textarea
+            name="details"
+            placeholder="Pershkruani problemin..."
+            rows={5}
+            required
+          />
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-700 hover:to-indigo-600"
+          >
             {loading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
