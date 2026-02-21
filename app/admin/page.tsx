@@ -4,34 +4,57 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { Navbar } from "@/components/navbar"
-import { ComplaintsTable } from "@/components/admin/complaints-table"
-import { UsersTable } from "@/components/admin/users-table"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { LogOut, Loader2, ShieldAlert, FileText, Users } from "lucide-react"
-import type { User } from "@supabase/supabase-js"
 
 export default function AdminPage() {
   const router = useRouter()
-  const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
+  const [dataLoading, setDataLoading] = useState(true)
+
+  const [users, setUsers] = useState<any[]>([])
+  const [complaints, setComplaints] = useState<any[]>([])
 
   useEffect(() => {
     const supabase = createClient()
+
     supabase.auth.getUser().then(({ data: { user } }) => {
       if (!user) {
         router.push("/auth/login")
         return
       }
-      const isAdmin = user.user_metadata?.is_admin === true
-      if (!isAdmin) {
+
+      if (!user.user_metadata?.is_admin) {
         router.push("/protected")
         return
       }
-      setUser(user)
+
       setLoading(false)
     })
   }, [router])
+
+  useEffect(() => {
+    async function fetchData() {
+      setDataLoading(true)
+
+      try {
+        const res = await fetch("/api/admin/data")
+        const json = await res.json()
+
+        setUsers(json.users ?? [])
+        setComplaints(json.complaints ?? [])
+      } catch (err) {
+        console.error("Admin fetch error:", err)
+        setUsers([])
+        setComplaints([])
+      }
+
+      setDataLoading(false)
+    }
+
+    fetchData()
+  }, [])
 
   async function handleLogout() {
     const supabase = createClient()
@@ -40,13 +63,46 @@ export default function AdminPage() {
     router.refresh()
   }
 
-  if (loading) {
+  if (loading || dataLoading) {
     return (
       <div className="flex min-h-screen flex-col bg-background">
         <Navbar />
         <main className="flex flex-1 items-center justify-center">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </main>
+      </div>
+    )
+  }
+
+  function renderTable(data: any[]) {
+    if (!data || data.length === 0) {
+      return <p className="text-muted-foreground">Nuk ka të dhëna.</p>
+    }
+
+    return (
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse border border-gray-300">
+          <thead>
+            <tr>
+              {Object.keys(data[0]).map((key) => (
+                <th key={key} className="border px-2 py-1 text-left">
+                  {key}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((row, i) => (
+              <tr key={i}>
+                {Object.values(row).map((val, j) => (
+                  <td key={j} className="border px-2 py-1">
+                    {val === null ? "-" : String(val)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     )
   }
@@ -69,6 +125,7 @@ export default function AdminPage() {
               </p>
             </div>
           </div>
+
           <Button variant="outline" size="sm" onClick={handleLogout}>
             <LogOut className="mr-2 h-4 w-4" />
             Dil
@@ -86,11 +143,13 @@ export default function AdminPage() {
               Përdoruesit
             </TabsTrigger>
           </TabsList>
+
           <TabsContent value="complaints">
-            <ComplaintsTable />
+            {renderTable(complaints)}
           </TabsContent>
+
           <TabsContent value="users">
-            <UsersTable />
+            {renderTable(users)}
           </TabsContent>
         </Tabs>
       </main>
