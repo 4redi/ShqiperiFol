@@ -23,7 +23,7 @@ export default function NotificationsPage() {
 
   const fetchNotifications = async () => {
     const { data } = await supabase
-      .from("notifications")
+      .from("lajmerime")
       .select("*")
       .order("created_at", { ascending: false });
 

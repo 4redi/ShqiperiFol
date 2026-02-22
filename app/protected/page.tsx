@@ -8,15 +8,104 @@ import { Footer } from "@/components/footer"
 import { ComplaintForm } from "@/components/complaint-form"
 import { MyComplaints } from "@/components/my-complaints"
 import { Button } from "@/components/ui/button"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Label } from "@/components/ui/label"
 import { LogOut, Loader2 } from "lucide-react"
 import type { User } from "@supabase/supabase-js"
 import { useSWRConfig } from "swr"
+
+const municipalities = [
+  "Tirana",
+  "Durrës",
+  "Vlorë",
+  "Shkodër",
+  "Fier",
+  "Berat",
+  "Korçë",
+  "Elbasan",
+  "Dibër",
+  "Himare",
+  "Sarandë",
+  "Pogradec",
+  "Kavajë",
+  "Lushnjë",
+  "Kruja",
+  "Laç",
+  "Mamurras",
+  "Kuçovë",
+  "Berr",
+  "Peqin",
+  "Çorovodë",
+  "Tepelenë",
+  "Librazhd",
+  "Gramsh",
+  "Poliçan",
+  "Bulqizë",
+  "Mirditë",
+  "Kurbin",
+  "Mat",
+  "Krujë",
+  "Shijak",
+  "Rrogozhinë",
+  "Ura Vajgurore",
+  "Divjakë",
+  "Selenicë",
+  "Finiq",
+  "Konispol",
+  "Dropull",
+  "Përmet",
+  "Këlcyrë",
+  "Devoll",
+  "Kolonyë",
+  "Pustec",
+  "Maliq",
+  "Libohovë",
+  "Ersekë",
+  "Skrapar",
+  "Memaliaj",
+  "Delvinë",
+  "Gjirokastër",
+  "Tropojë",
+  "Has",
+  "Vau i Dejës",
+  "Burrel",
+  "Klos",
+  "Ulëz",
+  "Rubik",
+  "Rrëshen",
+  "Lezhë",
+  "Shëngjin",
+  "Dajç",
+  "Koplik",
+  "Fushë-Arrëz",
+  "Pukë",
+  "Fierzë",
+  "Koman",
+  "Bajram Curri",
+  "Bytyç",
+  "Razëm",
+  "Fushë-Krujë",
+  "Vorë",
+  "Patos",
+  "Roskovec",
+  "Ballsh",
+  "Prrenjas",
+  "Cërrik",
+  "Belsh"
+];
 
 export default function ProtectedPage() {
   const router = useRouter()
   const { mutate } = useSWRConfig()
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
+  const [municipality, setMunicipality] = useState("Tiranë")
 
   useEffect(() => {
     const supabase = createClient()
@@ -71,9 +160,26 @@ export default function ProtectedPage() {
           </Button>
         </div>
 
+        <div className="mb-6">
+          <Label className="text-sm font-medium">Komuna</Label>
+          <Select value={municipality} onValueChange={setMunicipality}>
+            <SelectTrigger className="w-full max-w-xs">
+              <SelectValue placeholder="Zgjidhni komunën" />
+            </SelectTrigger>
+            <SelectContent>
+              {municipalities.map((mun) => (
+                <SelectItem key={mun} value={mun}>
+                  {mun}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
         <div className="flex flex-col gap-6">
           <ComplaintForm
             userId={user!.id}
+            municipality={municipality}
             onSuccess={() => mutate("my-complaints")}
           />
           <MyComplaints mutateKey="my-complaints" />

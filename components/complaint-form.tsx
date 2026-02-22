@@ -35,10 +35,11 @@ const categories = [
 
 interface ComplaintFormProps {
   userId: string
+  municipality: string
   onSuccess?: () => void
 }
 
-export function ComplaintForm({ userId, onSuccess }: ComplaintFormProps) {
+export function ComplaintForm({ userId, municipality, onSuccess }: ComplaintFormProps) {
   const [loading, setLoading] = useState(false)
   const [category, setCategory] = useState("")
 
@@ -61,6 +62,7 @@ export function ComplaintForm({ userId, onSuccess }: ComplaintFormProps) {
       category,
       address,
       details,
+      municipality,
     })
 
     if (error) {
