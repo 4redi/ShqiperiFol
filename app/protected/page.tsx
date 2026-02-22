@@ -19,6 +19,8 @@ import { Label } from "@/components/ui/label"
 import { LogOut, Loader2 } from "lucide-react"
 import type { User } from "@supabase/supabase-js"
 import { useSWRConfig } from "swr"
+import { Textarea } from "@/components/ui/textarea"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 
 const municipalities = [
   "Tirana",
@@ -98,7 +100,7 @@ const municipalities = [
   "Prrenjas",
   "Cërrik",
   "Belsh"
-];
+]
 
 export default function ProtectedPage() {
   const router = useRouter()
@@ -106,6 +108,11 @@ export default function ProtectedPage() {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const [municipality, setMunicipality] = useState("Tiranë")
+
+  // AI + ComplaintForm state
+  const [input, setInput] = useState("")
+  const [aiResult, setAIResult] = useState("")
+  const [loadingAI, setLoadingAI] = useState(false)
 
   useEffect(() => {
     const supabase = createClient()
@@ -124,6 +131,33 @@ export default function ProtectedPage() {
     await supabase.auth.signOut()
     router.push("/")
     router.refresh()
+  }
+
+  async function handleAI() {
+    if (!input) return
+
+    setLoadingAI(true)
+
+    try {
+      const res = await fetch("/api/rewrite", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: input }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok || data.error) {
+        alert(data.error || "Gabim gjatë AI")
+      } else {
+        setAIResult(data.result)
+      }
+    } catch (err) {
+      console.error(err)
+      alert("Gabim gjatë AI")
+    }
+
+    setLoadingAI(false)
   }
 
   if (loading) {
@@ -160,6 +194,7 @@ export default function ProtectedPage() {
           </Button>
         </div>
 
+        {/* Municipality selection */}
         <div className="mb-6">
           <Label className="text-sm font-medium">Komuna</Label>
           <Select value={municipality} onValueChange={setMunicipality}>
@@ -176,10 +211,44 @@ export default function ProtectedPage() {
           </Select>
         </div>
 
+        {/* AI Section */}
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle>Riformulimi i ankesës me AI</CardTitle>
+            <CardDescription>
+              Shkruani problemin dhe AI do ta përmirësojë.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-4">
+            <Textarea
+              rows={5}
+              placeholder="Shkruani ankesën tuaj..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            />
+            <Button
+              onClick={handleAI}
+              disabled={!input || loadingAI}
+              className="bg-blue-600"
+            >
+              {loadingAI ? "Duke përmirësuar..." : "Përmirëso me AI"}
+            </Button>
+
+            {aiResult && (
+              <div className="p-4 border rounded-lg bg-gray-50">
+                <h2 className="font-semibold mb-2">Versioni i përmirësuar:</h2>
+                <p>{aiResult}</p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Complaint Form */}
         <div className="flex flex-col gap-6">
           <ComplaintForm
             userId={user!.id}
             municipality={municipality}
+            initialDetails={aiResult}
             onSuccess={() => mutate("my-complaints")}
           />
           <MyComplaints mutateKey="my-complaints" />

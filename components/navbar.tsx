@@ -13,7 +13,6 @@ const navLinks = [
   { href: "/#si-funksionon", label: "Si Funksionon" },
   { href: "/protected", label: "Ankesat e Mia"},
   { href: "/ankesat", label: "Votoni" },
-  {href:"/chat",label:"AI"},
   { href: "/njoftimet", label: "Njoftime" }
 ]
 

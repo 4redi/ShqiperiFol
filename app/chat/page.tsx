@@ -9,7 +9,11 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Loader2 } from "lucide-react"
 
-export default function ProtectedPage({ userId }) {
+interface ProtectedPageProps {
+  userId: string
+}
+
+export default function ProtectedPage({ userId }: ProtectedPageProps) {
   const [input, setInput] = useState("")
   const [result, setResult] = useState("")
   const [loadingAI, setLoadingAI] = useState(false)

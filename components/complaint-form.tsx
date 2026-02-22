@@ -65,7 +65,6 @@ export function ComplaintForm({
 
     const { error } = await supabase.from("complaints").insert({
       user_id: userId,
-      municipality,
       category,
       address,
       details,

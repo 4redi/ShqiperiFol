@@ -16,7 +16,7 @@ export async function POST(req: Request) {
 
     const response = await openai.responses.create({
       model: "gpt-5-nano", 
-      input: `Rewrite this complaint professionally and clearly:\n\n${message}. Write the message diretcly, use proffesional grammar.`,
+      input: `Rewrite this complaint professionally and clearly:\n\n${message}. Write the message diretcly, use proffesional grammar. Don't use placeholders, USE JUST THE ALBANIAN LANGUAGE, short simple clean. Remember it should be user friendly, again in albanian`,
       store: true,
     })
 
