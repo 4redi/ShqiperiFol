@@ -11,7 +11,6 @@ import { createClient } from "@/lib/supabase/client"
 const navLinks = [
   { href: "/#rreth-nesh", label: "Rreth Nesh" },
   { href: "/#si-funksionon", label: "Si Funksionon" },
-  { href: "/chat", label: "AI" },
   { href: "/protected", label: "Ankesat e Mia"},
   { href: "/ankesat", label: "Votoni" },
   { href: "/njoftimet", label: "Njoftime" }

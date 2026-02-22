@@ -1,5 +1,11 @@
+"use client"
+
 import { Card } from "@/components/ui/card"
 import { Building2, TreePine, GraduationCap, HardHat } from "lucide-react"
+import { createClient } from "@/lib/supabase/client"
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import { toast } from "sonner" // optional: for toast notifications
 
 const categories = [
   {
@@ -29,6 +35,27 @@ const categories = [
 ]
 
 export function PhotosSection() {
+  const router = useRouter()
+  const [user, setUser] = useState<any>(null)
+
+  useEffect(() => {
+    const supabase = createClient()
+    const fetchUser = async () => {
+      const { data } = await supabase.auth.getUser()
+      setUser(data.user)
+    }
+    fetchUser()
+  }, [])
+
+  const handleCardClick = () => {
+    if (user) {
+      router.push("/protected") // redirect to Ankesat e Mia
+    } else {
+      toast.error("Ju duhet të jeni të kyçur për të parë ankesat tuaja!")
+      router.push("/auth/login") // optional: redirect to login
+    }
+  }
+
   return (
     <section
       id="rreth-nesh"
@@ -48,7 +75,8 @@ export function PhotosSection() {
           {categories.map((cat) => (
             <Card
               key={cat.title}
-              className="group cursor-default border-blue-100 bg-white/90 backdrop-blur-md transition-all hover:-translate-y-1 hover:shadow-xl"
+              className="group cursor-pointer border-blue-100 bg-white/90 backdrop-blur-md transition-all hover:-translate-y-1 hover:shadow-xl"
+              onClick={handleCardClick}
             >
               <div className="flex flex-col items-center px-5 py-8 text-center">
                 <div
@@ -57,10 +85,7 @@ export function PhotosSection() {
                   <cat.icon className="h-7 w-7" />
                 </div>
 
-                <h3 className="mb-1 font-semibold text-gray-900">
-                  {cat.title}
-                </h3>
-
+                <h3 className="mb-1 font-semibold text-gray-900">{cat.title}</h3>
                 <p className="text-sm text-gray-600">{cat.description}</p>
               </div>
             </Card>
