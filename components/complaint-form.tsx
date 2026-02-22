@@ -42,12 +42,11 @@ interface ComplaintFormProps {
 export function ComplaintForm({ userId, municipality, onSuccess }: ComplaintFormProps) {
   const [loading, setLoading] = useState(false)
   const [category, setCategory] = useState("")
+  const [address, setAddress] = useState("")
+  const [details, setDetails] = useState("")
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-    const address = formData.get("address") as string
-    const details = formData.get("details") as string
 
     if (!category) {
       toast.error("Ju lutem zgjidhni kategorinë.")
@@ -62,18 +61,19 @@ export function ComplaintForm({ userId, municipality, onSuccess }: ComplaintForm
       category,
       address,
       details,
-      municipality,
     })
 
     if (error) {
-      toast.error("Gabim gjatë dergimit të ankesës.")
+      console.error("Supabase insert error:", error)
+      toast.error("Gabim gjatë dërgimit të ankesës.")
       setLoading(false)
       return
     }
 
     toast.success("Ankesa u dërgua me sukses!")
     setCategory("")
-    e.currentTarget.reset()
+    setAddress("")  // clear input
+    setDetails("")  // clear textarea
     setLoading(false)
     onSuccess?.()
   }
@@ -81,9 +81,7 @@ export function ComplaintForm({ userId, municipality, onSuccess }: ComplaintForm
   return (
     <Card className="border-blue-100 bg-white/90 backdrop-blur-md shadow-xl">
       <CardHeader>
-        <CardTitle className="text-xl font-bold text-gray-900">
-          Ankesa e Re
-        </CardTitle>
+        <CardTitle className="text-xl font-bold text-gray-900">Ankesa e Re</CardTitle>
         <CardDescription>
           Plotësoni formularin për të paraqitur ankesën tuaj.
         </CardDescription>
@@ -107,12 +105,20 @@ export function ComplaintForm({ userId, municipality, onSuccess }: ComplaintForm
             </Select>
           </div>
 
-          <Input name="address" placeholder="Adresa" required />
+          <Input
+            name="address"
+            placeholder="Adresa"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
 
           <Textarea
             name="details"
             placeholder="Pershkruani problemin..."
             rows={5}
+            value={details}
+            onChange={(e) => setDetails(e.target.value)}
             required
           />
 
