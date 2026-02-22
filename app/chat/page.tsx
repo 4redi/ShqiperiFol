@@ -23,7 +23,7 @@ export default function ChatPage() {
     const data = await res.json()
 
     if (!res.ok || data.error) {
-      setResult(data.error || "Something went wrong")
+      setResult(data.error || "Dicka shkoi gabim")
     } else {
       setResult(data.result)
     }
@@ -39,12 +39,12 @@ export default function ChatPage() {
     <>
       <Navbar />
       <div className="min-h-screen p-8 max-w-2xl mx-auto">
-        <h1 className="text-2xl font-bold mb-4">AI Complaint Improver</h1>
+        <h1 className="text-2xl font-bold mb-4">Riformulimi i ankesës</h1>
 
         <textarea
           className="w-full border rounded-lg p-3 mb-4"
           rows={5}
-          placeholder="Write your complaint here..."
+          placeholder="Shkruani ankesën tuaj..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {
@@ -60,12 +60,12 @@ export default function ChatPage() {
           disabled={!input || loading}
           className="bg-blue-600 text-white px-4 py-2 rounded-lg disabled:opacity-50"
         >
-          {loading ? "Improving..." : "Improve Text"}
+          {loading ? "Duke u përmirësuar ..." : "Teksti i përmirësuar"}
         </button>
 
         {result && (
           <div className="mt-6 p-4 border rounded-lg bg-gray-50">
-            <h2 className="font-semibold mb-2">Improved Version:</h2>
+            <h2 className="font-semibold mb-2">Versioni i  përmirësuar:</h2>
             <p>{result}</p>
           </div>
         )}

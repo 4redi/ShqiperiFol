@@ -163,8 +163,8 @@ export default function ComplaintsPage() {
                 `}
               >
                 {isVoted
-                  ? "Voted ✓ (Click to Unvote)"
-                  : "Vote"}
+                  ? "Votuar (Kliko përsëri për të hequr votën)"
+                  : "Votoni"}
               </button>
             </div>
           );

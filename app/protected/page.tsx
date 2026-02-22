@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { Navbar } from "@/components/navbar"
+import { Footer } from "@/components/footer"
 import { ComplaintForm } from "@/components/complaint-form"
 import { MyComplaints } from "@/components/my-complaints"
 import { Button } from "@/components/ui/button"
@@ -38,11 +39,12 @@ export default function ProtectedPage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen flex-col bg-background">
+      <div className="flex flex-col min-h-screen bg-background">
         <Navbar />
-        <main className="flex flex-1 items-center justify-center">
+        <main className="flex-1 flex items-center justify-center">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </main>
+        <Footer />
       </div>
     )
   }
@@ -50,9 +52,10 @@ export default function ProtectedPage() {
   const fullName = user?.user_metadata?.full_name || "Përdorues"
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex flex-col min-h-screen bg-background">
       <Navbar />
-      <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-8 lg:px-6">
+
+      <main className="flex-1 mx-auto w-full max-w-3xl px-4 py-8 lg:px-6">
         <div className="mb-8 flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold tracking-tight text-foreground">
@@ -76,6 +79,8 @@ export default function ProtectedPage() {
           <MyComplaints mutateKey="my-complaints" />
         </div>
       </main>
+
+      <Footer />
     </div>
   )
 }
