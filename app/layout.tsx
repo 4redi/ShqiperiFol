@@ -8,7 +8,7 @@ const _inter = Inter({ subsets: ['latin'] })
 const _jetbrainsMono = JetBrains_Mono({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Ankesa - Platforma e Ankesave Qytetare',
+  title: 'ShqiptarFol - Platforma e Ankesave Qytetare',
   description: 'Paraqisni ankesat tuaja për problemet ne komunitet. Urbanistikë, Mjedisi, Arsimi dhe më shumë.',
 }
 

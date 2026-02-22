@@ -1,5 +1,7 @@
+"use client"
+
 import Link from "next/link"
-import { Shield } from "lucide-react"
+import Image from "next/image"
 
 const quickLinks = [
   { href: "/#rreth-nesh", label: "Rreth Nesh" },
@@ -13,10 +15,16 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-12">
         <div className="flex flex-col gap-10 md:flex-row md:justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-indigo-500">
-              <Shield className="h-5 w-5 text-white" />
+            <div className="h-9 w-9">
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                width={36}
+                height={36}
+                className="rounded-lg object-cover"
+              />
             </div>
-            <span className="text-xl font-bold text-gray-900">Ankesa</span>
+            <span className="text-xl font-bold text-red-900">ShqiptarFol</span>
           </Link>
 
           <div className="flex gap-12">
@@ -32,8 +40,8 @@ export function Footer() {
           </div>
         </div>
 
-        <p className="mt-10 text-center text-xs text-gray-500">
-          © {new Date().getFullYear()} Ankesa
+        <p className="mt-10 text-center text-xs text-blue-500">
+          © {new Date().getFullYear()} ShqiptarFol
         </p>
       </div>
     </footer>

@@ -28,22 +28,22 @@ export function HeroSection() {
             zgjidhjen e tyre në kohë reale.
           </p>
 
-          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
-            <Button
-              size="lg"
-              asChild
-              className="bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-700 hover:to-indigo-600"
-            >
-              <Link href="/auth/sign-up">
-                FILLO TANI
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Button
+            size="lg"
+            asChild
+            className="bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-700 hover:to-indigo-600"
+          >
+            <Link href="/auth/sign-up" className="flex items-center">
+              FILLO TANI
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
 
-            <Button size="lg" variant="outline" asChild>
-              <Link href="#si-funksionon">MËSONI MË SHUMË</Link>
-            </Button>
-          </div>
+          <Button size="lg" variant="outline" asChild>
+            <Link href="#si-funksionon">MËSONI MË SHUMË</Link>
+          </Button>
+        </div>
         </div>
 
         <div className="mx-auto mt-16 grid max-w-xl grid-cols-3 gap-6">

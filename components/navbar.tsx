@@ -1,15 +1,17 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Shield, Menu, X } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 
 const navLinks = [
   { href: "/#rreth-nesh", label: "Rreth Nesh" },
   { href: "/#si-funksionon", label: "Si Funksionon" },
-  {href: "/chat", label:"AI"}
+  { href: "/chat", label: "AI" },
+  { href: "/ankesat", label: "Ankesat"}
 ]
 
 export function Navbar() {
@@ -22,13 +24,20 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-blue-100 bg-white/80 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 lg:px-6">
+      <nav
+        className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 lg:px-6"
+        style={{ marginTop: 0, marginBottom: 0, padding: 0 }}
+      >
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-indigo-500">
-            <Shield className="h-5 w-5 text-white" />
-          </div>
-          <span className="text-xl font-bold tracking-tight text-gray-900">
-            Ankesa
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={80}
+            height={80}
+            className="rounded-lg object-cover"
+          />
+          <span className="text-xl font-bold tracking-tight text-red-900">
+            ShqiptarFol
           </span>
         </Link>
 
@@ -39,7 +48,7 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm font-medium text-gray-600 transition-colors hover:text-blue-600"
+                  className="text-lg font-semibold text-gray-800 tracking-wide transition-colors hover:text-blue-600"
                 >
                   {link.label}
                 </Link>
