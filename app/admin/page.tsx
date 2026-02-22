@@ -6,13 +6,17 @@ import { createClient } from "@/lib/supabase/client"
 import { Navbar } from "@/components/navbar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
-import { LogOut, Loader2, ShieldAlert, FileText, Users } from "lucide-react"
+import { LogOut, Loader2, ShieldAlert, FileText, Users ,FileExclamationPoint,Bot,Bell} from "lucide-react"
 
 export default function AdminPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(true)
   const [dataLoading, setDataLoading] = useState(true)
-
+const [aiInput, setAiInput] = useState("")
+const [aiResult, setAiResult] = useState("")
+const [aiLoading, setAiLoading] = useState(false)
+const [notifyText, setNotifyText] = useState("")
+const [notifyLoading, setNotifyLoading] = useState(false)
   const [users, setUsers] = useState<any[]>([])
   const [complaints, setComplaints] = useState<any[]>([])
 
@@ -63,6 +67,25 @@ export default function AdminPage() {
     router.refresh()
   }
 
+  const priorityKeywords = [
+  "gropa",
+  "grope",
+  "gropat",
+  "mbeturina",
+  "puset",
+  "puseta"
+]
+
+const priorityComplaints = complaints.filter((complaint) => {
+  const text = Object.values(complaint)
+    .join(" ")
+    .toLowerCase()
+
+  return priorityKeywords.some((word) =>
+    text.includes(word.toLowerCase())
+  )
+})
+
   if (loading || dataLoading) {
     return (
       <div className="flex min-h-screen flex-col bg-background">
@@ -106,6 +129,59 @@ export default function AdminPage() {
       </div>
     )
   }
+  async function analyzeWithAI() {
+  if (!aiInput.trim()) return
+
+  setAiLoading(true)
+  setAiResult("")
+
+  try {
+    const res = await fetch("/api/rewrite_admin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: aiInput }),
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) {
+      setAiResult(data.error || "Error")
+    } else {
+      setAiResult(data.result)
+    }
+  } catch (error) {
+    setAiResult("Server error")
+  }
+
+  setAiLoading(false)
+}
+
+async function sendNotification() {
+  if (!notifyText.trim()) return
+
+  setNotifyLoading(true)
+
+  const res = await fetch("/api/lajmerime", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ message: notifyText }),
+  })
+
+  const data = await res.json()
+
+  if (!res.ok) {
+    alert(data.error)
+  } else {
+    alert("Njoftimi u ruajt me sukses!")
+    setNotifyText("")
+  }
+
+  setNotifyLoading(false)
+}
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -142,6 +218,20 @@ export default function AdminPage() {
               <Users className="h-4 w-4" />
               Përdoruesit
             </TabsTrigger>
+            <TabsTrigger value="complaints-priority" className="flex items-center gap-2">
+              <FileExclamationPoint className="h-4 w-4" />
+              Ankesat prioritare
+            </TabsTrigger>
+
+            <TabsTrigger value="chat" className="flex items-center gap-2">
+              <Bot className="h-4 w-4" />
+              Flisni me AI
+            </TabsTrigger>
+
+            <TabsTrigger value="notify" className="flex items-center gap-2">
+              <Bell className="h-4 w-4" />
+              Lajmëroni qytetarët
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="complaints">
@@ -149,8 +239,60 @@ export default function AdminPage() {
           </TabsContent>
 
           <TabsContent value="users">
-            {renderTable(users)}
-          </TabsContent>
+  {renderTable(
+    users.map((user) => ({
+      email: user.email
+    }))
+  )}
+</TabsContent>
+
+          <TabsContent value="complaints-priority">
+  {renderTable(priorityComplaints)}
+</TabsContent>
+
+          <TabsContent value="chat">
+  <div className="space-y-4 max-w-3xl">
+
+    <textarea
+      className="w-full border rounded-md p-3 min-h-[120px]"
+      placeholder="Shkruani ose vendosni ankesën këtu..."
+      value={aiInput}
+      onChange={(e) => setAiInput(e.target.value)}
+    />
+
+    <Button onClick={analyzeWithAI} disabled={aiLoading}>
+      {aiLoading ? (
+        <>
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          Duke analizuar...
+        </>
+      ) : (
+        "Analizo me AI"
+      )}
+    </Button>
+
+    {aiResult && (
+      <div className="border rounded-md p-4 bg-muted whitespace-pre-wrap">
+        {aiResult}
+      </div>
+    )}
+  </div>
+</TabsContent>
+
+<TabsContent value="notify">
+  <div className="space-y-4 max-w-2xl">
+    <textarea
+      className="w-full border rounded-md p-3 min-h-[120px]"
+      placeholder="Shkruani njoftimin për qytetarët..."
+      value={notifyText}
+      onChange={(e) => setNotifyText(e.target.value)}
+    />
+
+    <Button onClick={sendNotification} disabled={notifyLoading}>
+      {notifyLoading ? "Duke ruajtur..." : "Publiko njoftimin"}
+    </Button>
+  </div>
+</TabsContent>
         </Tabs>
       </main>
     </div>
