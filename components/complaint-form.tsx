@@ -36,14 +36,20 @@ const categories = [
 interface ComplaintFormProps {
   userId: string
   municipality: string
+  initialDetails?: string
   onSuccess?: () => void
 }
 
-export function ComplaintForm({ userId, municipality, onSuccess }: ComplaintFormProps) {
+export function ComplaintForm({
+  userId,
+  municipality,
+  initialDetails,
+  onSuccess,
+}: ComplaintFormProps) {
   const [loading, setLoading] = useState(false)
   const [category, setCategory] = useState("")
   const [address, setAddress] = useState("")
-  const [details, setDetails] = useState("")
+  const [details, setDetails] = useState(initialDetails || "")
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -56,32 +62,38 @@ export function ComplaintForm({ userId, municipality, onSuccess }: ComplaintForm
     setLoading(true)
 
     const supabase = createClient()
+
     const { error } = await supabase.from("complaints").insert({
       user_id: userId,
+      municipality,
       category,
       address,
       details,
     })
 
     if (error) {
-      console.error("Supabase insert error:", error)
+      console.error("Supabase error:", error)
       toast.error("Gabim gjatë dërgimit të ankesës.")
       setLoading(false)
       return
     }
 
     toast.success("Ankesa u dërgua me sukses!")
+
     setCategory("")
-    setAddress("")  // clear input
-    setDetails("")  // clear textarea
+    setAddress("")
+    setDetails("")
     setLoading(false)
+
     onSuccess?.()
   }
 
   return (
     <Card className="border-blue-100 bg-white/90 backdrop-blur-md shadow-xl">
       <CardHeader>
-        <CardTitle className="text-xl font-bold text-gray-900">Ankesa e Re</CardTitle>
+        <CardTitle className="text-xl font-bold text-gray-900">
+          Ankesa e Re
+        </CardTitle>
         <CardDescription>
           Plotësoni formularin për të paraqitur ankesën tuaj.
         </CardDescription>
@@ -130,12 +142,12 @@ export function ComplaintForm({ userId, municipality, onSuccess }: ComplaintForm
             {loading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Duke derguar...
+                Duke dërguar...
               </>
             ) : (
               <>
                 <SendHorizonal className="mr-2 h-4 w-4" />
-                Dergo Ankesën
+                Dërgo Ankesën
               </>
             )}
           </Button>
