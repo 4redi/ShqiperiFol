@@ -16,10 +16,10 @@ And there’s more. <b>Shqipëri Fol</b> also includes a dedicated AI assistant 
 <b>Shqipëri Fol</b> isn’t just a complaint platform, it’s a smarter, faster, and more transparent way to connect citizens and municipalities.
 
 ## Contributors
-@4redi
-@nensiallushi
-@cloudsaa
-@joanateneqexhi
+- [@4redi](https://www.github.com/4redi)
+- [@cloudsaa](https://www.github.com/cloudsaa)
+- [@nensiallushi](https://www.github.com/nensiallushi)
+- [@joanateneqexhi](https://www.github.com/joanateneqexhi)
 
 ## Technologies used
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
