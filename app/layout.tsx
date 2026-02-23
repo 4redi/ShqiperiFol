@@ -8,10 +8,15 @@ const _inter = Inter({ subsets: ['latin'] })
 const _jetbrainsMono = JetBrains_Mono({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'ShqiptarFol - Platforma e Ankesave Qytetare',
+  title: 'ShqipëriFol',
   description: 'Paraqisni ankesat tuaja për problemet ne komunitet. Urbanistikë, Mjedisi, Arsimi dhe më shumë.',
+  icons:{
+    icon:'/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
+  
+  }
 }
-
 export default function RootLayout({
   children,
 }: Readonly<{
